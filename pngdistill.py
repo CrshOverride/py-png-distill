@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 from cStringIO import StringIO
-from shutil import copyfileobj
 from zopfli.zlib import compress
 from zlib import decompress
 import png
@@ -49,7 +48,9 @@ def build_idat_chunk(chunks):
     return ('IDAT', compress(decompressed))
 
 if __name__ == "__main__":
+    from shutil import copyfileobj
     import sys
+
     result = distill(filename=sys.argv[1])
     result.seek(0)
     with open(sys.argv[2], 'w+') as output_file:
